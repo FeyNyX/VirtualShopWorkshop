@@ -21,11 +21,13 @@ class Item
   private $itemDescription;
   private $itemCount;
 
+  //Tworzenie polaczenia z baza danych przez api.php
   public static function setConnection(mysqli $newConnection)
   {
     self::$conn = $newConnection;
   }
 
+  //Wstawianie nowego przedmiotu do bazy danych
   public static function createItem($newItemName, $newItemPrice, $newItemDescription, $newItemCount)
   {
     $sql = "INSERT INTO Items (itemName, itemPrice, itemDescription, itemCount)
@@ -40,6 +42,7 @@ class Item
     return false;
   }
 
+  //Ladowanie przedmiotow (pojedyczno po id lub wszystkich naraz)
   public static function getItems($itemId = null)
   {
     $itemTab = [];
