@@ -20,10 +20,9 @@ $match = $router->match();
 
 
 //wpisujemy to do register.php
-
 //include('header.php');
 if($match){
-  require $match['target'];
+  require '../'.$match['target'];
 }
 //include('footer.php');
 
