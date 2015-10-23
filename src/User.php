@@ -47,7 +47,8 @@ class User
     return false;
   }
 
-  public static function register($newUserName, $newUserSurname, $newUserEmail, $password, $password2, $newUserAddress)
+  public static function register($newUserName, $newUserSurname, $newUserEmail, $password,
+                                  $password2, $newUserAddress)
   {
     if ($password != $password2) {
       return false;
@@ -104,7 +105,11 @@ class User
 
   public function setUserName($userName)
   {
-    $this->userName = $userName;
+    if (is_string($userName) && strlen($userName) < 60 &&
+      preg_match('#^[A-Za-z]+$#', $userName)
+    ) {
+      $this->userName = filter_var($userName, FILTER_SANITIZE_STRING);
+    }
   }
 
   public function getUserSurname()
@@ -114,7 +119,11 @@ class User
 
   public function setUserSurname($userSurname)
   {
-    $this->userSurname = $userSurname;
+    if (is_string($userSurname) && strlen($userSurname) < 60 &&
+      preg_match('#^[A-Za-z]+$#', $userSurname)
+    ) {
+      $this->userSurname = filter_var($userSurname, FILTER_SANITIZE_STRING);
+    }
   }
 
   public function getUserEmail()
@@ -124,7 +133,15 @@ class User
 
   public function setUserEmail($userEmail)
   {
-    $this->userEmail = $userEmail;
+    if (is_string($userEmail) && strlen($userEmail) < 60 &&
+      preg_match('#^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[azA-Z0-9-]{1,})*\.([a-zA-Z]{2,}){1}$#',
+        $userEmail)
+    ) {
+      var_dump(preg_match('#^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[azA-Z0-9-]{1,})
+                          *\.([a-zA-Z]{2,}){1}$#',
+        $userEmail));
+      $this->userEmail = filter_var($userEmail, FILTER_SANITIZE_EMAIL);
+    }
   }
 
   public function getUserAddress()
@@ -134,6 +151,8 @@ class User
 
   public function setUserAddress($userAddress)
   {
-    $this->userAddress = $userAddress;
+    if (is_string($userAddress) && strlen($userAddress) < 100) {
+      $this->userAddress = filter_var($userAddress, FILTER_SANITIZE_STRING);
+    }
   }
 }
