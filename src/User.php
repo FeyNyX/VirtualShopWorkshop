@@ -30,7 +30,7 @@ class User
 
     public static function login($email, $password)
     {
-        $sql = "SELECT * FROM Users WHERE email = '$email'";
+        $sql = "SELECT * FROM Users WHERE userEmail = '$email'";
         $result = self::$conn->query($sql);
         if ($result == true) {
             if ($result->num_rows == 1) {
@@ -88,6 +88,23 @@ class User
             return true;
         }
         return false;
+    }
+
+    // Ladowanie wiadomosci wyslanych do uzytkownika (wszystkich naraz)
+    public static function getMessages($userId)
+    {
+        $messageTab = [];
+        $sql = "SELECT * FROM Messages WHERE userId = $userId";
+        $result = self::$conn->query($sql);
+        if ($result == true) {
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $shownMessage = new Message($row['messageId'], $row['userId'], $row['messageText']);
+                $messageTab[] = $shownMessage;
+            }
+        }
+
+        return $messageTab;
     }
 
     public function __construct($newUserId, $newUserName, $newUserSurname, $newUserEmail, $newUserAddress)

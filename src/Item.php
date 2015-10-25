@@ -60,7 +60,6 @@ class Item
     return $itemTab;
   }
 
-
   public function __construct($newItemId, $newItemName, $newItemPrice, $newItemDescription, $newItemCount)
   {
     $this->itemId = $newItemId;
