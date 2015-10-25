@@ -4,6 +4,8 @@ require_once(dirname(__FILE__) . '/../config/db.php');
 require_once(dirname(__FILE__) . '/../src/Item.php');
 require_once(dirname(__FILE__) . '/../src/User.php');
 require_once(dirname(__FILE__) . '/../src/Admin.php');
+require_once(dirname(__FILE__) . '/../src/Order.php');
+require_once(dirname(__FILE__) . '/../src/Message.php');
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DB, DB_PORT);
 if ($conn->connect_error) {
@@ -27,3 +29,5 @@ if ($match) {
 User::setConnection($conn);
 Admin::setConnection($conn);
 Item::setConnection($conn);
+Order::setConnection($conn);
+Message::setConnection($conn);

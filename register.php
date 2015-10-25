@@ -1,5 +1,6 @@
 <?php
 require_once("api/api.php");
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -41,8 +42,7 @@ include('header.php');
             </div>
             <div class="form-group">
                 <div class="col-sm-10">
-                    <input type="address" class="form-control" name="address" id="address" placeholder="Enter
-                    address">
+                    <input type="address" class="form-control" name="address" id="address" placeholder="Enter address">
                 </div>
             </div>
             <div class="form-group">

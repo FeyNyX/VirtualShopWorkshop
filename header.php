@@ -12,9 +12,9 @@ session_start();
             </button>
             <a class="navbar-brand" href="#">Logo</a>
             <?php
-            if (!$_SESSION['isLoggedIn']) {
+            if (empty($_SESSION['userId'])) {
                 echo('
-                <form class="navbar-form navbar-left" role="form" action="" method="post">
+                <form class="navbar-form navbar-left" id="loginForm" name="header" role="form" action="" method="post">
                 <div class="form-group">
                     <input class="form-control" id="login" type="text" placeholder="Login">
                 </div>
@@ -23,10 +23,22 @@ session_start();
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon2"><i class="fa fa-sign-in"></i></span>
-                    <input type="submit" class="form-control" value="Log in" aria-describedby="basic-addon2">
+                    <input type="submit" class="form-control" id="log-in" value="Log in" aria-describedby="basic-addon2">
                 </div>
-            </form>
-            ');
+                or <div class="input-group">
+                    <a href="rejestracja">REGISTER</a>
+                </div>
+                </form>
+                ');
+            } else {
+                echo('
+                <form class="navbar-form navbar-left" id="logoutForm" name="header" role="form" action="" method="post">
+                    <div class="input-group">
+                       <span class="input-group-addon" id="basic-addon2"><i class="fa fa-sign-out"></i></span>
+                       <input type="submit" class="form-control" id="log-out" value="Log out" aria-describedby="basic-addon2">
+                    </div>
+                    </form>
+                    ');
             }
             ?>
         </div>

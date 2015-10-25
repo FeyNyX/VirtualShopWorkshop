@@ -11,6 +11,16 @@ CREATE TABLE Items(
 )
 */
 
+/*
+CREATE TABLE Images(
+  imageId INT AUTO_INCREMENT,
+  itemId INT,
+  imagePath VARCHAR(255),
+  PRIMARY KEY(imageId),
+  FOREIGN KEY (itemId) REFERENCES Items (itemId)
+)
+*/
+
 class Item
 {
   private static $conn;
@@ -49,16 +59,18 @@ class Item
     $sql = "SELECT * FROM Items" . ($itemId === null ? '' : 'WHERE itemId =' . $itemId);
     $result = self::$conn->query($sql);
     if ($result == true) {
-      if ($result->num_rows > 0) { // czuje ze w przypadku wielu przedmiotow trzeba bedzie tu wrucic petle while, ale to jeszcze zobaczymy
-        $row = $result->fetch_assoc();
-        $shownItem = new Item($row['itemId'], $row['itemName'], $row['itemPrice'], $row['itemDescription'],
-          $row['itemCount']);
-        $itemTab[] = $shownItem; //czy tu gdzies nie powinnismy returnowac juz wyniku?
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          $shownItem = new Item($row['itemId'], $row['itemName'], $row['itemPrice'], $row['itemDescription'],
+              $row['itemCount']);
+          $itemTab[] = $shownItem;
+        }
+        return $itemTab;
       }
     }
-
-    return $itemTab; // a tu z kolei zwracac false
+    return false;
   }
+
 
   public function __construct($newItemId, $newItemName, $newItemPrice, $newItemDescription, $newItemCount)
   {
