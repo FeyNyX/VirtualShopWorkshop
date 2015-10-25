@@ -107,6 +107,44 @@ class User
         return $messageTab;
     }
 
+    // Ladowanie koszyka (zamowienia niezlozonego)
+    public static function getBasket($userId)
+    {
+        $sql = "SELECT * FROM Orders
+        JOIN Items_Orders ON Orders.orderId=Items_Orders.orderId
+        JOIN Items ON Items.itemId=Items_Orders.itemId WHERE userId = '$userId' AND orderStatus = '0'";
+        $result = self::$conn->query($sql);
+        if ($result == true) {
+            if ($result->num_rows > 0) {
+                while ($itemInBasket = $result->fetch_assoc()) {
+                    $basketItems[] = $itemInBasket;
+                }
+                return $basketItems;
+            }
+        }
+
+        return false;
+    }
+
+    // Ladowanie historii zamowien (wszytskie zamowienia oprocz niezlozonych)
+    public static function getOrderHistory($userId)
+    {
+        $sql = "SELECT * FROM Orders
+        JOIN Items_Orders ON Orders.orderId=Items_Orders.orderId
+        JOIN Items ON Items.itemId=Items_Orders.itemId WHERE userId = '$userId' AND NOT (orderStatus = '0')";
+        $result = self::$conn->query($sql);
+        if ($result == true) {
+            if ($result->num_rows > 0) {
+                while ($pastOrder = $result->fetch_assoc()) {
+                    $pastOrders[] = $pastOrder;
+                }
+                return $pastOrders;
+            }
+        }
+
+        return false;
+    }
+
     public function __construct($newUserId, $newUserName, $newUserSurname, $newUserEmail, $newUserAddress)
     {
         $this->userId = $newUserId;

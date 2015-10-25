@@ -49,15 +49,15 @@ class Item
     $sql = "SELECT * FROM Items" . ($itemId === null ? '' : 'WHERE itemId =' . $itemId);
     $result = self::$conn->query($sql);
     if ($result == true) {
-      if ($result->num_rows > 0) {
+      if ($result->num_rows > 0) { // czuje ze w przypadku wielu przedmiotow trzeba bedzie tu wrucic petle while, ale to jeszcze zobaczymy
         $row = $result->fetch_assoc();
         $shownItem = new Item($row['itemId'], $row['itemName'], $row['itemPrice'], $row['itemDescription'],
           $row['itemCount']);
-        $itemTab[] = $shownItem;
+        $itemTab[] = $shownItem; //czy tu gdzies nie powinnismy returnowac juz wyniku?
       }
     }
 
-    return $itemTab;
+    return $itemTab; // a tu z kolei zwracac false
   }
 
   public function __construct($newItemId, $newItemName, $newItemPrice, $newItemDescription, $newItemCount)
