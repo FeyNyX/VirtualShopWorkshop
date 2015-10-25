@@ -12,7 +12,7 @@ session_start();
             </button>
             <a class="navbar-brand" href="#">Logo</a>
             <?php
-            if(!$_SESSION['isLoggedIn']){
+            if (!$_SESSION['isLoggedIn']) {
                 echo('
                 <form class="navbar-form navbar-left" role="form" action="" method="post">
                 <div class="form-group">
