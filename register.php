@@ -1,5 +1,5 @@
 <?php
-require_once("api/api.php");
+require_once("index.php");
 session_start();
 ?>
 

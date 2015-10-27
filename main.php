@@ -1,6 +1,11 @@
 <?php
-require_once("api/api.php");
 session_start();
+require_once("index.php");
+
+if (!empty($_SESSION)) {
+    $myUser = $_SESSION['user'];
+    $userName = $myUser->getUserName();
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +26,9 @@ session_start();
 <body>
 <?php
 include('header.php');
+echo "<h1>$userName</h1>";
+echo "<h1>$userName</h1>";
+echo "<h1>$userName</h1>";
 ?>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="js/script.js"></script>

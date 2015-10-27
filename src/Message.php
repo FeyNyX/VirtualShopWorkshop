@@ -18,7 +18,7 @@ class Message
     private $userId;
     private $messageText;
 
-    //Tworzenie polaczenia z baza danych przez api.php
+    //Tworzenie polaczenia z baza danych przez index.php
     public static function setConnection(mysqli $newConnection)
     {
         self::$conn = $newConnection;

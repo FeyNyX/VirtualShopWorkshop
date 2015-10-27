@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -14,12 +10,12 @@ session_start();
             <?php
             if (empty($_SESSION['userId'])) {
                 echo('
-                <form class="navbar-form navbar-left" id="loginForm" name="header" role="form" action="" method="post">
+                <form class="navbar-form navbar-left" id="loginForm" name="header" role="form" action="checkLogin" method="post">
                 <div class="form-group">
-                    <input class="form-control" id="login" type="text" placeholder="Login">
+                    <input class="form-control" name="login" type="text" placeholder="Login">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" id="password" type="text" placeholder="Password">
+                    <input class="form-control" name="password" type="text" placeholder="Password">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon2"><i class="fa fa-sign-in"></i></span>
@@ -32,8 +28,7 @@ session_start();
                 ');
             } else {
                 echo('
-                <form class="navbar-form navbar-left" id="logoutForm" name="header" role="form"
-                  action="" method="post">
+                <form class="navbar-form navbar-left" id="logoutForm" name="header" role="form" action="logout" method="post">
                     <div class="input-group">
                        <span class="input-group-addon" id="basic-addon2"><i class="fa fa-sign-out"></i></span>
                        <input type="submit" class="form-control" id="log-out" value="Log out" aria-describedby="basic-addon2">
