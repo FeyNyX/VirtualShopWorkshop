@@ -29,7 +29,8 @@ include('header.php');
 
         <h2>Register:</h2>
 
-        <form class="form-horizontal" role="form" name="register" method="post">
+        <form class="form-horizontal" role="form" name="register" method="post"
+              action="/VirtualShopWorkshop/checkRegister">
             <div class="form-group">
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="name" id="name" placeholder="Enter name">

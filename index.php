@@ -1,4 +1,6 @@
 <?php
+header('Content-type: text/html; charset=utf-8');
+
 require_once __DIR__ . '/vendor/autoload.php';
 require_once(dirname(__FILE__) . '/config/db.php');
 require_once(dirname(__FILE__) . '/src/Item.php');
@@ -15,11 +17,14 @@ if ($conn->connect_error) {
 } else {
     $conn->set_charset('utf8');
 }
+
+// connections with db have to be established this early - it won't work other way
 User::setConnection($conn);
 Admin::setConnection($conn);
 Item::setConnection($conn);
 Order::setConnection($conn);
 Message::setConnection($conn);
+
 //tworzymy nowy obiekt AltoRouter
 $router = new AltoRouter();
 //z db.php bierzemy base_path, ktory jest naszym katalogiem glownym po ktorym bedziemy otrzymywac ladne slashe
@@ -31,5 +36,5 @@ $match = $router->match();
 if ($match) {
     require $match['target'];
 } else {
-    echo "Nie ma strony.";
+    echo "<h1>(╯°□°）╯︵ ┻━┻</h1>";
 }

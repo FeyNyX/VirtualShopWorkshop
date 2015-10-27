@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user'] = $myUser;
             $_SESSION['userId'] = $userId;
             header("location: /VirtualShopWorkshop/");
+            // exit makes sure that no other code is run after hader. here it is redundant but i left it for future reference
             exit;
         }
     }
