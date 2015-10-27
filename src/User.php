@@ -35,12 +35,12 @@ class User
         if ($result == true) {
             if ($result->num_rows == 1) {
                 $row = $result->fetch_assoc();
-                //if (password_verify($password, $row['password'])) {
+                if (password_verify($password, $row['userPassword'])) {
                     $loggedUser = new User($row["userId"], $row["userName"], $row["userSurname"], $row["userEmail"],
                         $row["userAddress"]);
 
                     return $loggedUser;
-                // }
+                }
             }
         }
 

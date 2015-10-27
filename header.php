@@ -30,16 +30,18 @@ session_start();
                 </div>
                 </form>
                 ');
-            } ?>
-            <form class="navbar-form navbar-left" id="logoutForm" style="display: none" name="header" role="form"
+            } else {
+                echo('
+                <form class="navbar-form navbar-left" id="logoutForm" name="header" role="form"
                   action="" method="post">
                     <div class="input-group">
                        <span class="input-group-addon" id="basic-addon2"><i class="fa fa-sign-out"></i></span>
                        <input type="submit" class="form-control" id="log-out" value="Log out" aria-describedby="basic-addon2">
                     </div>
                     </form>
-
-
+                    ');
+            }
+            ?>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
