@@ -4,8 +4,8 @@ require_once("api.php");
 session_start();
 
 if (!empty($_POST)) {
-    if ($_POST['regName'] && $_POST['regSurname'] && $_POST['regAddress'] && $_POST['regEmail'] && $_POST['regPwd'] &&
-        $_POST['regPwd2']
+    if (isset($_POST['regName']) && isset($_POST['regSurname']) && isset($_POST['regAddress']) && isset($_POST['regEmail']) && isset($_POST['regPwd']) &&
+        isset($_POST['regPwd2'])
     ) {
         $name = $_POST['regName'];
         $surname = $_POST['regSurname'];
@@ -19,17 +19,16 @@ if (!empty($_POST)) {
             $userId = $user->getUserId();
             $arr = $user->getUsers($userId);
         }
+        echo json_encode($arr);
     }
-    if ($_POST['loginEmail'] && $_POST['loginPassword']) {
+    if (isset($_POST['loginEmail']) && isset($_POST['loginPassword'])) {
         $email = $_POST['loginEmail'];
         $password = $_POST['loginPassword'];
         $user = User::login($email, $password);
         $userId = $user->getUserId();
         $_SESSION['userId'] = $userId;
     }
-    if ($_POST['killUser'] == true) {
+    if (isset($_POST['killUser']) && $_POST['killUser'] == true) {
         unset($_SESSION['userId']);
     }
 }
-
-echo json_encode($arr);

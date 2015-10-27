@@ -32,6 +32,7 @@ $(function () {
         //pobieramy z htmla wpisane wartosci i przypisujemy je do zmiennych tak samo nazwanych
         var login = document.header.login.value;
         var password = document.header.password.value;
+        console.log("dfdfh");
         $.ajax({
             method: "POST",
             url: "api/AJAXServer.php",
@@ -41,9 +42,13 @@ $(function () {
                 loginPassword: password
             },
             dataType: "json",
+            error: function (xh, code, aa) {
+                console.log(xh);
+            },
             success: function (json) {
                 console.log(json);
                 $('#loginForm').hide();
+                $('#logoutForm').show();
             }
         })
     })
@@ -61,6 +66,7 @@ $(function () {
             success: function (json) {
                 console.log(json);
                 $('#loginForm').show();
+                $('#logoutForm').hide();
             }
         })
     })
